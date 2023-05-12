@@ -10,30 +10,44 @@ const jsConfetti = new JSConfetti({ canvas })
 
  
 
+// const scrambledWords = {
+//   TISE: 'ties',
+//   FECOITNAF: 'affection',
+//   BIGODNN: 'bonding',
+//   CMIYTNAI: 'intimacy',
+//   RSUTT: 'trust',
+//   TIAEAPPCRE: 'appreciate',
+// };
 const scrambledWords = {
     TISE: {
     word: 'ties',
-    hint: "A word that refers to the connection between two things or people, often used to describe something that is tightly bound together. Men often wear this around their necks"
+    hint: "A word that refers to the connection between two things or people, often used to describe something that is tightly bound together. Men often wear this around their necks",
+    sc: 'TISE'
     },
     FECOITNAF: {
     word: 'affection',
-    hint: "Conveys a strong feeling of love, tenderness, and caring towards someone"
+      hint: "Conveys a strong feeling of love, tenderness, and caring towards someone",
+    sc: 'FECOITNAF'
     },
     BIGODNN: {
     word: 'bonding',
-    hint: "It's a word that refers to the process of developing a close connection with someone. It often involves sharing experiences, feelings, and thoughts, and can help strengthen the bond between two people."
+      hint: "It's a word that refers to the process of developing a close connection with someone. It often involves sharing experiences, feelings, and thoughts, and can help strengthen the bond between two people.",
+    sc: 'BIGODNN'
     },
     CMIYTNAI: {
     word: 'intimacy',
-    hint: "It's a word that refers to a close, personal connection between two people, both physically and emotionally. It's an essential part of a romantic relationship, and can involve things like sharing feelings, experiences, and desires with your partner, as well as physical touch and affection."
+      hint: "It's a word that refers to a close, personal connection between two people, both physically and emotionally. It's an essential part of a romantic relationship, and can involve things like sharing feelings, experiences, and desires with your partner, as well as physical touch and affection.",
+    sc: 'CMIYTNAI'
     },
     RSUTT: {
     word: 'trust',
-    hint: "A crucial element of any healthy relationship. It involves having faith in your partner, believing that they will be honest and faithful to you, and feeling secure in the knowledge that they have your best interests at heart. It can take time to develop, but it's essential for building a strong and lasting relationship."
+      hint: "A crucial element of any healthy relationship. It involves having faith in your partner, believing that they will be honest and faithful to you, and feeling secure in the knowledge that they have your best interests at heart. Trust can take time to develop, but it's essential for building a strong and lasting relationship.",
+    sc: 'RSUTT'
     },
     TIAEAPPCRE: {
     word: 'appreciate',
-    hint: "Conveys a feeling of gratitude and recognition for someone."
+      hint: "Conveys a feeling of gratitude and recognition for someone.",
+    sc: 'TIAEAPPCRE'
     },
     };
 const Game = () => {
@@ -45,6 +59,7 @@ const Game = () => {
   );
     
   const [currentScrambled, setCurrentScrambled] = useState('');
+  const [currentScrambledWord, setCurrentScrambledWord] = useState('');
 
 
   const handleChange = (event, key) => {
@@ -88,10 +103,13 @@ const Game = () => {
           
     }
 
-  const handleFocus = (event, key) => {
-    const { hint } = scrambledWords[key];
-    setCurrentScrambled(hint);
-  };
+    const handleFocus = (event, key) => {
+      const { hint } = scrambledWords[key];
+      const { sc } = scrambledWords[key];
+
+      setCurrentScrambled(hint);
+      setCurrentScrambledWord(sc);
+    };
   
   return (
       <div className='' id='your_custom_canvas_id'>
@@ -150,8 +168,19 @@ const Game = () => {
           </p>
           
 
-          <div>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '2rem 0'
+      }}>
+        <p className='text-blue-600'>
+
+        {currentScrambledWord}
+        </p>
+        <p>
+
               {currentScrambled}
+        </p>
           </div>
 
        
